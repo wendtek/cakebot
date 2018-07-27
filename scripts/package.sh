@@ -9,4 +9,5 @@ VENV_DIR=$(pipenv --venv)
 echo "Packaging app code"
 cd $PROJECT_DIR && zip $PACKAGE_FILE ./*.py
 echo "Packaging dependencies"
+ls $VENV_DIR/lib/
 cd $VENV_DIR/lib/python3.6/site-packages && zip $PACKAGE_FILE ./*

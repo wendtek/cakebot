@@ -39,7 +39,6 @@ def handler(event, context):
             'name': item_content.find_all(class_='item__name')[0].getText(),
             'price': Decimal(item_content.find_all(class_='item__price')[0].getText()[1:])})
 
-    for item in items
     pprint(items)
 
     return True
