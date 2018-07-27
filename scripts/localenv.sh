@@ -1,0 +1,5 @@
+#!/bin/bash
+
+export FOODA_ACCOUNT_ID=2127
+export FOODA_BUILDING_ID=3
+export FOODA_SEED_EVENT_ID=S190371

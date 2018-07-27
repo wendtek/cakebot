@@ -1,0 +1,15 @@
+language: python
+python:
+  - "3.6"
+
+before_install:
+  - pip install pipenv --upgrade
+install:
+  - scripts/build.sh
+script:
+  - scripts/package.sh
+  - scripts/deploy.sh
+
+branches:
+  only:
+  - master
