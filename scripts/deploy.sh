@@ -12,7 +12,8 @@ source $PROJECT_DIR/scripts/setenv.sh
 if [[ $TRAVIS = "true" ]] ; then
   echo "Downloading Terraform..."
   curl -LO $TERRAFORM_ZIP_URL
-  unzip terraform*.zip -d terraform
+  unzip terraform*.zip -d ./
+  export PATH="$PATH:$PROJECT_DIR"
 fi
 
 
