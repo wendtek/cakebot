@@ -27,8 +27,9 @@ def handler(data, context):
             logger.info('Responding to challenge with {}'.format(event_body.get('challenge')))
             return {'statusCode': 200, 'body': event_body.get('challenge')}
 
-        # post_to_slack({})
-        # logger.info(get_all_items())
+        response = util.event_parser.generate_response(data['body'])
+        logger.info(response)
+        post_to_slack({'text': response})
 
         return {'statusCode': 200}
 
@@ -62,4 +63,4 @@ def verify_token(token):
 
 
 if __name__ == '__main__':
-    handler(data={'body': '{\"token\":\"faketoken\",\"challenge\":\"fakechallenge\"}'}, context=None)
+    handler(data={'body': '{}'}, context=None)
