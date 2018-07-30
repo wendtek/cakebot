@@ -46,7 +46,7 @@ def post_to_slack(body):
 
     res = requests.post(config['slack_webhook_url'], data=json.dumps(body))
 
-    logger.info('Slack post status code: {}'.format(res.statusCode))
+    logger.info('Slack post status code: {}'.format(res.status_code))
 
 
 def verify_token(token):

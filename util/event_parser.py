@@ -20,14 +20,14 @@ def generate_response(body):
     now = datetime.now(central)
 
     items = get_all_items(next_delivery_date(now))
-    tree_fiddy = sorted(filter_items(items, max=Decimal(3.50)), key=lambda item: item['vendor'])
+    tree_fiddy = sorted(filter_items(items, max=Decimal(3.60)), key=lambda item: item['vendor'])
 
     response_text = '\n'.join(['{} from {} for ${}'.format(
                         item['name'],
                         item['vendor'],
                         item['price']) for item in tree_fiddy if item['category'] == 'Desserts'])
 
-    return response_text
+    return 'Free items ' + response_text
 
 
 def filter_items(items, min=Decimal(0), max=Decimal(1337)):
