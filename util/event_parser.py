@@ -25,7 +25,7 @@ def generate_response(body):
     response_text = '\n'.join(['{} from {} for ${}'.format(
                         item['name'],
                         item['vendor'],
-                        item['price']) for item in tree_fiddy])
+                        item['price']) for item in tree_fiddy if item['category'] == 'Desserts'])
 
     return response_text
 

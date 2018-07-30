@@ -28,7 +28,7 @@ def handler(data, context):
             return {'statusCode': 200, 'body': event_body.get('challenge')}
 
         response = util.event_parser.generate_response(data['body'])
-        logger.info(response)
+
         post_to_slack({'text': response})
 
         return {'statusCode': 200}
