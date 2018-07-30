@@ -7,11 +7,23 @@ PACKAGE_FILE=$PROJECT_DIR/package.zip
 
 [ -f $PACKAGE_FILE ]
 
-source $PROJECT_DIR/script/setenv.sh
+source $PROJECT_DIR/scripts/setenv.sh
 
-#echo "Starting terraform deploy..."
-#cd $PROJECT_DIR/terraform
-#terraform init
-#terraform apply --auto-approve
-#
-#echo "Terraform deployed successfully!"
+if [[ $TRAVIS = "true" ]] ; then
+  echo "Downloading Terraform..."
+  curl -LO $TERRAFORM_ZIP_URL
+  unzip terraform*.zip -d terraform
+fi
+
+
+echo "Starting terraform deploy..."
+cd $PROJECT_DIR/terraform
+terraform init
+terraform plan -out tfplan
+
+if [[ $1 = "--plan-only" ]] ; then
+  echo "Exiting without apply Terraform changes because \"--plan-only\" was specified."
+else
+  terraform apply tfplan
+  echo "Terraform deployed successfully!"
+fi
