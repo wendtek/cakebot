@@ -34,7 +34,7 @@ def handler(data, context):
         return {'statusCode': 200}
 
     except Exception as e:
-        logging.exception(e)
+        logging.error(e)
         return {'statusCode': 500, 'body': 'Error in lambda proxy'}
 
 

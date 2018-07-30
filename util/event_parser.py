@@ -37,6 +37,7 @@ def filter_items(items, min=Decimal(0), max=Decimal(1337)):
 
 def next_delivery_date(dt):
     if dt.time() < time(hour=10, minute=0) and dt.weekday() in [0, 1, 2, 3]:
+        print(dt.strftime('%Y-%m-%d'))
         return dt.strftime('%Y-%m-%d')
     else:
         return next_delivery_date((dt + timedelta(days=1)).replace(hour=8, minute=0))
@@ -46,7 +47,7 @@ def get_all_items(date_string):
     day_url = construct_filter_url(
         account_id=config['fooda_account_id'],
         building_id=config['fooda_building_id'],
-        date_string='2018-07-31')
+        date_string=date_string)
     res = requests.get(day_url, cookies=cookies)
 
     calendar_soup = BeautifulSoup(res.content, 'html.parser')
