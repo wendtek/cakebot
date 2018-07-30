@@ -1,12 +1,13 @@
 resource "aws_lambda_function" "lambda_cakebot" {
-  filename      = "../package.zip"
-  function_name = "lambda_cakebot"
-  role          = "${aws_iam_role.lambda_cakebot.arn}"
-  handler       = "app.handler"
-  runtime       = "python3.6"
-  timeout       = "${var.timeout}"
-  memory_size   = "${var.memory_size}"
-  description   = "Scrapes Fooda and posts to Slack"
+  filename         = "../package.zip"
+  source_code_hash = "${base64sha256(file("../package.zip"))}"
+  function_name    = "lambda_cakebot"
+  role             = "${aws_iam_role.lambda_cakebot.arn}"
+  handler          = "app.handler"
+  runtime          = "python3.6"
+  timeout          = "${var.timeout}"
+  memory_size      = "${var.memory_size}"
+  description      = "Scrapes Fooda and posts to Slack"
 
   environment {
     variables = {
