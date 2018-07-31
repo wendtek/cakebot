@@ -31,11 +31,11 @@ def handler(data, context):
 
         post_to_slack({'text': response})
 
-        return {'statusCode': 200}
+        return {'statusCode': 200, 'headers': {'X-Slack-No-Retry': 1}}
 
     except Exception as e:
         logging.error(e)
-        return {'statusCode': 500, 'body': 'Error in lambda proxy'}
+        return {'statusCode': 500, 'body': 'Error in lambda proxy', 'headers': {'X-Slack-No-Retry': 1}}
 
 
 def post_to_slack(body):
