@@ -30,7 +30,7 @@ def generate_response(body):
 
     response_text = '\n'.join(['Items under $3.60 for *{}*:'.format(fetch_date.strftime('%A, %B %d')),
                                response_text,
-                               '_Order here:_ {}:'.format(menu['url'])])
+                               '_Order here:_ {}'.format(menu['url'])])
 
     return response_text
 

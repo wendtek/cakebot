@@ -26,6 +26,9 @@ def handler(data, context):
         if event_body.get('challenge'):
             logger.info('Responding to challenge with {}'.format(event_body.get('challenge')))
             return {'statusCode': 200, 'body': event_body.get('challenge')}
+        if data['headers'].get('X-Slack-Retry-Reason') == 'http_timeout':
+            logger.info('Exiting because "X-Slack-Retry-Reason" header was set to "http_timeout"')
+            return {'statusCode': 200}
 
         response = util.event_parser.generate_response(data['body'])
 
@@ -34,7 +37,7 @@ def handler(data, context):
         return {'statusCode': 200, 'headers': {'X-Slack-No-Retry': 1}}
 
     except Exception as e:
-        logging.error(e)
+        logger.error(e)
         return {'statusCode': 500, 'body': 'Error in lambda proxy', 'headers': {'X-Slack-No-Retry': 1}}
 
 
@@ -63,4 +66,4 @@ def verify_token(token):
 
 
 if __name__ == '__main__':
-    handler(data={'body': '{}'}, context=None)
+    handler(data={'body': '{}', 'headers': {}}, context=None)
