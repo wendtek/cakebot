@@ -21,7 +21,7 @@ def generate_response(body):
     fetch_date = next_delivery_date(datetime.now(central))
 
     menu = get_full_menu(fetch_date.strftime('%Y-%m-%d'))
-    tree_fiddy = sorted(filter_items(menu['items'], max=Decimal(3.60)), key=lambda item: item['vendor'])
+    tree_fiddy = sorted(filter_items(menu['items'], max=Decimal(3.48)), key=lambda item: item['vendor'])
 
     response_text = '\n'.join(['{} - {} for ${}'.format(
                         item['vendor'],
